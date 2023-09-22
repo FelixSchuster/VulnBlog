@@ -1,6 +1,7 @@
 <ul class="navbar">
     <li><a href="index.php">Home</a></li>
     <li><a href="index.php?page=create_blogpost.php">Create Blogpost</a></li>
+    <li><a href="index.php?page=blogpost_history.php">Previously created Blogposts</a></li>
     <li><a href="https://rebrand.ly/r1ckr0l13r">Never</a></li>
     <li><a href="https://rebrand.ly/r1ckr0l13r">Gonna</a></li>
     <li><a href="https://rebrand.ly/r1ckr0l13r">Give</a></li>

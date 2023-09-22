@@ -17,7 +17,7 @@
     </form>
 </div>
 <?php
-    if (isset($_POST["create_blogpost"])) {
+    if (isset($_POST["create_blogpost"]) && isset($_POST["heading"]) && isset($_POST["blogpost"])) {
         if($query_handler->create_blogpost($_SESSION["user_id"], date("Y-m-d H:i:s"), $_POST["heading"], $_POST["blogpost"])) {
             ugly_alert("Success!");
 
