@@ -13,8 +13,9 @@
                 $user_id = $result->user_id;
                 $username = $result->username;
                 $password = $result->password;
+                $profile_picture = $result->profile_picture;
             
-                return new User($user_id, $username, $password);
+                return new User($user_id, $username, $password, $profile_picture);
             }
 
             return false;
@@ -30,14 +31,15 @@
                 $user_id = $result->user_id;
                 $username = $result->username;
                 $password = $result->password;
+                $profile_picture = $result->profile_picture;
             
-                return new User($user_id, $username, $password);
+                return new User($user_id, $username, $password, $profile_picture);
             }
 
             return false;
         }
 
-        public function get_user_by_id($user_id) {
+        public function get_user_by_user_id($user_id) {
             $query = $this->db->prepare("SELECT * FROM users WHERE user_id = ?");
             $query->bind_param("i", $user_id);
             $query->execute();
@@ -47,8 +49,9 @@
                 $user_id = $result->user_id;
                 $username = $result->username;
                 $password = $result->password;
+                $profile_picture = $result->profile_picture;
             
-                return new User($user_id, $username, $password);
+                return new User($user_id, $username, $password, $profile_picture);
             }
 
             return false;
@@ -87,6 +90,62 @@
             }
 
             return false;
+        }
+
+        public function get_blogposts_by_user_id($user_id) {
+            $query = $this->db->prepare("SELECT * FROM blogposts WHERE user_id = ? ORDER BY date_time DESC");
+            $query->bind_param("i", $user_id);
+            $query->execute();
+            $results = $query->get_result();
+
+            if($results == true) {
+                $result_array = array();
+
+                while($result = $results->fetch_object()) {
+                    $blogpost_id = $result->blogpost_id;
+                    $user_id = $result->user_id;
+                    $date_time = $result->date_time;
+                    $heading = $result->heading;
+                    $blogpost = $result->blogpost;
+    
+                    array_push($result_array, new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost));
+                }
+    
+                return $result_array;
+            }
+
+            return false;
+        }
+
+        public function get_blogpost_by_blogpost_id($blogpost_id) {
+            $query = $this->db->prepare("SELECT * FROM blogposts WHERE blogpost_id = ? ORDER BY date_time DESC");
+            $query->bind_param("i", $blogpost_id);
+            $query->execute();
+            $results = $query->get_result();
+
+            if($results == true) {
+                if($result = $results->fetch_object()) {
+                    $blogpost_id = $result->blogpost_id;
+                    $user_id = $result->user_id;
+                    $date_time = $result->date_time;
+                    $heading = $result->heading;
+                    $blogpost = $result->blogpost;
+    
+                    return new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost);
+                }
+            }
+
+            return false;
+        }
+
+        public function update_blogpost_by_blogpost_id($blogpost_id, $user_id, $date_time, $heading, $blogpost) {
+            $query = $this->db->prepare("UPDATE blogposts SET user_id = ?, date_time = ?, heading = ?, blogpost = ? WHERE blogpost_id = ?");
+            $query->bind_param("isssi", $user_id, $date_time, $heading, $blogpost, $blogpost_id);
+            $query->execute();
+    
+            // apparently there is no option to return the object that was updated
+            // just return $query which results in true/false depending on the query beeing successful
+            return $query;
         }
     }
 ?>

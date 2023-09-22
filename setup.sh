@@ -34,12 +34,15 @@ setup_webpage() {
     sudo rm /var/www/html/vulnblog/ -v -r
     sudo mkdir /var/www/html/vulnblog -v
     sudo cp ./html/* /var/www/html/vulnblog/ -v -r
-    sudo chown $(logname) /var/www/html/vulnblog/ -v
+    sudo chown www-data /var/www/html/vulnblog/ -v -R
+    #   ^ fix permission denied errors for shared folders with hostmachine if run in virtualbox
+    #   could also run 'sudo adduser www-data vboxsf' - for further information see:
+    #   https://stackoverflow.com/questions/26740113/virtualbox-shared-folder-permissions
     echo -e "\n  $yellowstar Done setting up the webpage.."
 }
 
 check_for_root
-install_dependencies
+# install_dependencies
 setup_database
 setup_webpage
 
