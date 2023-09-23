@@ -68,7 +68,7 @@ http://127.0.0.1/vulnblog/index.php?page=../../../../../../../../etc/passwd
 ```
 
 ### 2021 - Server-Side Request Forgery (SSRF)
-Clicking on Dogs sends a GET Request with an imaginery API Key to the dog ceo API.
+Clicking on Dogs sends a GET Request with an imaginary API Key to the dog ceo API.
 The URL looks like that: http://localhost/vulnblog/index.php?page=dogs.php&url=https://dog.ceo/api/breeds/image/random
 
 We can change the url to our own webserver: &url=http://localhost:8888
