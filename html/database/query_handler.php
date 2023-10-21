@@ -57,10 +57,21 @@
             return false;
         }
 
-        public function create_blogpost($user_id, $date_time, $heading, $blogpost) {
+        public function create_blogpost($user_id, $date_time, $heading, $blogpost,  $blog_image) {
             $zero = 0; // fix cannot pass parameter by reference error.. because php is beeing stupid once again
-            $query = $this->db->prepare("INSERT INTO blogposts VALUES (?, ?, ?, ?, ?)");
-            $query->bind_param("iisss", $zero, $user_id, $date_time, $heading, $blogpost);
+            $query = $this->db->prepare("INSERT INTO blogposts VALUES (?, ?, ?, ?, ?, ?)");
+            $query->bind_param("iissss", $zero, $user_id, $date_time, $heading, $blogpost, $blog_image);
+            $query->execute();
+
+            // apparently there is no option to return the object that was inserted into the db
+            // just return $query which results in true/false depending on the query beeing successful
+            return $query;
+        }
+
+        public function create_blogpost_with_image($user_id, $date_time, $heading, $blogpost, $blog_image) {
+            $zero = 0; // fix cannot pass parameter by reference error.. because php is beeing stupid once again
+            $query = $this->db->prepare("INSERT INTO blogposts VALUES (?, ?, ?, ?, ?, ?)");
+            $query->bind_param("iissss", $zero, $user_id, $date_time, $heading, $blogpost, $blog_image);
             $query->execute();
 
             // apparently there is no option to return the object that was inserted into the db
@@ -82,8 +93,9 @@
                     $date_time = $result->date_time;
                     $heading = $result->heading;
                     $blogpost = $result->blogpost;
+                    $blog_image = $result->blog_image;
     
-                    array_push($result_array, new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost));
+                    array_push($result_array, new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost, $blog_image));
                 }
     
                 return $result_array;
@@ -107,8 +119,9 @@
                     $date_time = $result->date_time;
                     $heading = $result->heading;
                     $blogpost = $result->blogpost;
+                    $blog_image = $result->blog_image;
     
-                    array_push($result_array, new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost));
+                    array_push($result_array, new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost, $blog_image));
                 }
     
                 return $result_array;
@@ -130,8 +143,9 @@
                     $date_time = $result->date_time;
                     $heading = $result->heading;
                     $blogpost = $result->blogpost;
+                    $blog_image = $result->blog_image;
     
-                    return new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost);
+                    return new Blogpost($blogpost_id, $user_id, $date_time, $heading, $blogpost, $blog_image);
                 }
             }
 

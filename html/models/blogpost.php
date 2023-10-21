@@ -5,13 +5,15 @@
         private $date_time;
         private $heading;
         private $blogpost;
+        private $blog_image;
 
-        function __construct($blogpost_id, $user_id, $date_time, $heading, $blogpost) {
+        function __construct($blogpost_id, $user_id, $date_time, $heading, $blogpost, $blog_image) {
             $this->blogpost_id = $blogpost_id;
             $this->user_id = $user_id;
             $this->date_time = $date_time;
             $this->heading = $heading;
             $this->blogpost = $blogpost;
+            $this->blog_image = $blog_image;
         }
 
         public function get_blogpost_id() {
@@ -34,6 +36,10 @@
             return $this->blogpost;
         }
 
+        public function get_blog_image() {
+            return $this->blog_image;
+        }
+
         public function set_blogpost_id($blogpost_id) {
             $this->blogpost_id = $blogpost_id;
         }
@@ -52,6 +58,10 @@
 
         public function set_blogpost($blogpost) {
             $this->blogpost = $blogpost;
+        }
+
+        public function set_blog_image($blog_image) {
+            $this->blog_image = $blog_image;
         }
     } 
 ?>
