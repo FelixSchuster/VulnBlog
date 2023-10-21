@@ -12,13 +12,16 @@
                     $date_time = $blogpost->get_date_time();
                     $heading = $blogpost->get_heading();
                     $blogpost_text = $blogpost->get_blogpost();
-
+                    $blog_image = $blogpost->get_blog_image();
+                    
                     // might change this to proper dom manipulation later on but it kinda works for now
                     echo "<div class=\"row\">";
                         echo "<table>";
                             echo "<tr>";
                                 echo "<td class=\"width-20\">" . $date_time . "<br><br>User: " . $username;
-                                echo "<td><h2>" . $heading . "</h2>" . $blogpost_text . "</td>";
+                                echo "<td><h2>" . $heading . "</h2>" . $blogpost_text;
+                                if ($blog_image != "") {echo "<div> <br><br> <img src= 'uploads/" . $blog_image . "' alt='image_post' width='200'</div>";}
+                                echo "</td>";
                             echo "</tr>";
                         echo "</table>";
                     echo "</div>";
