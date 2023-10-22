@@ -34,6 +34,10 @@
                 }
                 echo "</table>";
             }
+
+            else {
+                echo "No blogposts created yet.";
+            }
         ?>
     </div>
 </div>

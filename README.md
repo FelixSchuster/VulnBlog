@@ -7,8 +7,15 @@ A vulnerable PHP/MariaDB web application created for the BIF-5/WEBSEC course.
 
 ```
 git clone https://github.com/FelixSchuster/VulnBlog
+cd VulnBlog
 sudo chmod +x setup.sh
 sudo ./setup.sh
+```
+
+## Docker
+```
+sudo docker build -t vulnblog .
+sudo docker run -d -p 80:80 vulnblog
 ```
 
 ## Default Credentials
@@ -16,24 +23,25 @@ Database:
 - `vulnuser`:`P@ssword`
 
 Webpage:
-- `admin`:`admin`
-- `felix`:`P@ssword`
+- `Admin`:`Admin`
+- `Felix`:`P@ssword`
+- `Alex`:`P@ssword`
+- `Bea`:`P@ssword`
 
 Passwords are currently saved in plain text, might change this later on.. or not, it's just another vulnerability to test for.
 
 ## Vulnerabilities / Proof of Concept
 
 ### A01:2021 – Broken Access Control
-#### Example 1
-In the navbar select 'Previously created Blogposts' and edit any blogpost.
+In the navbar select 'History' and edit any blogpost.
+
 You can edit blogposts of other users by editing the id parameter in the url.
 ```
 http://127.0.0.1/vulnblog/index.php?page=edit_blogpost.php&id=<EDIT THIS>
 ```
 
-### A03:2021 – Injection
-#### Example 1: SQL Injection
-The login form is injectable:
+### A03:2017 – Injection
+The login form is sql injectable:
 ```
 http://127.0.0.1/vulnblog/index.php?page=login.php
 ```
@@ -41,10 +49,10 @@ http://127.0.0.1/vulnblog/index.php?page=login.php
 Valid SQL injection queries are:
 ```
 ' or 1=1 #
-admin' #
+<username>' #
 ```
 
-#### Example 2: Stored Cross-Site-Scripting
+### A7:2017-Cross-Site Scripting (XSS)
 Create a blogpost including the following payload:
 ```
 <script>alert("XSS");</script>
@@ -61,13 +69,12 @@ nc -lvnkp 1234
 ```
 
 ### A04:2013 - Insecure Direct Object References
-#### Example 1
 Try accessing:
 ```
 http://127.0.0.1/vulnblog/index.php?page=../../../../../../../../etc/passwd
 ```
 
-### 2021 - Server-Side Request Forgery (SSRF)
+### A10:2021 - Server-Side Request Forgery (SSRF)
 Clicking on Dogs sends a GET Request with an imaginery API Key to the dog ceo API.
 The URL looks like that: http://localhost/vulnblog/index.php?page=dogs.php&url=https://dog.ceo/api/breeds/image/random
 
@@ -88,13 +95,12 @@ TopSecretApiKey!:
 ```
 
 ### A03:2017 – Sensitive Data Exposure
-#### Example 1:
 Vulnblog offers the capability to upload images in blog entries. The access is not protected, this allows users to navigate to the directory and get access to the uploads.
 ```
 http://localhost/vulnblog/uploads/
 ```
+
 ### A03:2007 - Malicious File Execution
-#### Example 1:
 Unrestricted file uploads:
 
 You can upload a PHP script to execute malicious code.

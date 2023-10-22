@@ -14,7 +14,7 @@ check_for_root() {
 install_dependencies() {
     echo -e "\n  $yellowstar Installing dependencies\n"
     sudo apt-get update -y
-    sudo apt-get install apache2 php libapache2-mod-php php-ldap php-mysqli -y
+    sudo apt-get install apache2 php libapache2-mod-php php-ldap php-mysqli php-curl -y
 	sudo systemctl enable apache2
 	sudo systemctl start apache2
 	sudo apt-get install mariadb-server -y
@@ -42,7 +42,7 @@ setup_webpage() {
 }
 
 check_for_root
-# install_dependencies
+install_dependencies
 setup_database
 setup_webpage
 
