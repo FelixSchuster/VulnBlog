@@ -103,7 +103,7 @@ https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell
 The file will be executed.
 
 After that you need to get access to the server in order to use the reverse shell.
-Use netcat to listen on port 1234.
+Use Netcat to listen on port 1234.
 ```
 nc -lvnp 1234
 ```
