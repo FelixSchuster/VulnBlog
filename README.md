@@ -89,7 +89,7 @@ TopSecretApiKey!:
 
 ### A03:2017 – Sensitive Data Exposure
 #### Example 1:
-Vulnblog offers the capability to upload images in blog entries. "The access is not protected, this allows users to navigate to the directory and get access to the uploads.
+Vulnblog offers the capability to upload images in blog entries. The access is not protected, this allows users to navigate to the directory and get access to the uploads.
 ```
 http://localhost/vulnblog/uploads/
 ```
