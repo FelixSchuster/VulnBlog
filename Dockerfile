@@ -8,6 +8,8 @@ RUN apt-get install -y apache2 php libapache2-mod-php php-ldap php-mysqli mariad
 
 COPY ./html /var/www/html/vulnblog
 
+RUN chown www-data /var/www/html/vulnblog -R
+
 COPY ./database/db.sql /tmp/
 
 COPY ./docker/entrypoint.sh /usr/local/bin/
