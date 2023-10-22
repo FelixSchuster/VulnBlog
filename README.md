@@ -89,7 +89,7 @@ TopSecretApiKey!:
 
 ### A03:2017 – Sensitive Data Exposure
 #### Example 1:
-The Vulnblog rents the option to upload images in blog entries. "The access is not protected, this allows users to navigate to the directory and get access to the uploads.
+Vulnblog offers the capability to upload images in blog entries. "The access is not protected, this allows users to navigate to the directory and get access to the uploads.
 ```
 http://localhost/vulnblog/uploads/
 ```
@@ -98,12 +98,12 @@ http://localhost/vulnblog/uploads/
 Unrestricted file uploads:
 
 You can upload a PHP script to execute malicious code.
-Try to upload the php-reverse-shell script to get acces to the server.
+Try to upload the php-reverse-shell script to gain access to the server.
 https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
 The file will be executed.
 
-After that you need to get access to the server to use the reverse shell.
-Use netcat to listen to port 1234.
+After that you need to get access to the server in order to use the reverse shell.
+Use netcat to listen on port 1234.
 ```
 nc -lvnp 1234
 ```
