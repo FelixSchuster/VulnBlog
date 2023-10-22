@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h1>Previously created Blogposts</h1>
+        <h1>History</h1>
     </div>
     <div class="row">
         <?php
