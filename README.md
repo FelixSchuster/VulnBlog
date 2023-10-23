@@ -12,6 +12,8 @@ sudo chmod +x setup.sh
 sudo ./setup.sh
 ```
 
+Vulnblog will be available at http://127.0.0.1/vulnblog
+
 ## Docker
 ```
 sudo docker build -t vulnblog .
