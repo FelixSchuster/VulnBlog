@@ -29,6 +29,7 @@ Webpage:
 - `Felix`:`P@ssword`
 - `Alex`:`P@ssword`
 - `Bea`:`P@ssword`
+- `Kathrin`:`%-.Z]~xt#Adnq@hW^|{0Uyr(.S3Wal`
 
 Passwords are currently saved in plain text, might change this later on.. or not, it's just another vulnerability to test for.
 
